@@ -17,7 +17,7 @@ limitations under the License.
 
 'use strict';
 
-import { CastQueue } from './queuing.js';
+// import { CastQueue } from './queuing.js';
 import { MediaFetcher } from './media_fetcher.js';
 import { AdsTracker, SenderTracker, ContentTracker } from './cast_analytics.js';
 
@@ -45,7 +45,7 @@ const ID_REGEX = '\/?([^\/]+)\/?$';
  * Debug Logger
  */
 const castDebugLogger = cast.debug.CastDebugLogger.getInstance();
-const LOG_RECEIVER_TAG = 'Receiver';
+const LOG_RECEIVER_TAG = 'FilmTrade_Receiver';
 
 /*
  * WARNING: Make sure to turn off debug logger for production release as it
@@ -101,6 +101,24 @@ playerManager.addEventListener(
         'LOAD_FAILED: Verify the load request is set up ' +
         'properly and the media is able to play.');
     }
+});
+
+/**
+ * DRM SUPPORT
+ */
+playerManager.setMediaPlaybackInfoHandler((loadRequest, playbackConfig) => {
+  const customData = loadRequest.media.customData || {};
+
+  if(customData.mux && customData.mux.tokens.drm){
+    castDebugLogger.debug(LOG_RECEIVER_TAG, 'Setting license URL.');
+    playbackConfig.licenseUrl = `https://license.mux.com/license/widevine/${customData.mux.playbackId}?token=${customData.mux.tokens.drm}`;
+  }
+
+  playbackConfig.protectionSystem = cast.framework.ContentProtection.WIDEVINE;
+
+  castDebugLogger.debug(LOG_RECEIVER_TAG, 'license url', playbackConfig.licenseUrl);
+
+  return playbackConfig;
 });
 
 /*
