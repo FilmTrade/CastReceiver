@@ -48,6 +48,12 @@ cast-media-player {
   z-index: 9999;
   opacity: 0.5;
   pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+#logo-overlay.hidden {
+  opacity: 0;
+  visibility: hidden;
 }
 
 #logo-overlay img {
