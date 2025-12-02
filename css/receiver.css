@@ -15,7 +15,7 @@ limitations under the License.
 */
 
 body {
-  --playback-logo-image: url('res/logo_googleg_color_2x_web_48dp.png');
+  --playback-logo-image: url('filmtrade-logo.svg');
 }
 
 cast-media-player {
@@ -41,17 +41,16 @@ cast-media-player {
 /* FilmTrade Logo Overlay                            */
 /* ------------------------------------------------- */
 cast-media-player:after {
-  content: "tests";
+  content: "SAMPLE";
   position: absolute;
-  left: 50%;
+  left: 0;
+  right: 0;
   top: 50%;
-  transform: translate(-50%, -50%);
-  width: 353px;
-  height: 204px;
-  background-image: url('./filmtrade-logo.svg');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
+  bottom: 0;
+  text-align: center;
+  font-size: 200px;
+  font-weight: bold;
+  margin-top: -150px;
   opacity: 0.5;
-  pointer-events: none;
+  color: red;
 }
