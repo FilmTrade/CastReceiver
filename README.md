@@ -2,6 +2,8 @@
 
 This sample shows how to develop a fully Cast Design Checklist compliant receiver with additional features.
 
+This is designed for MUX DRM usage as described here: https://www.mux.com/docs/guides/play-drm-protected-videos-on-google-cast
+
 **This is a reference receiver app to be used as the starting point for your custom receiver**
 
 [List of reference apps and tutorials](https://developers.google.com/cast/docs/downloads)
