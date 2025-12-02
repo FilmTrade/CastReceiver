@@ -40,24 +40,18 @@ cast-media-player {
 /* ------------------------------------------------- */
 /* FilmTrade Logo Overlay                            */
 /* ------------------------------------------------- */
-#logo-overlay {
-  position: fixed;
-  left: 50%;
+cast-media-player:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
   top: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 9999;
+  bottom: 0;
+  background-image: url('./filmtrade-logo.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-top: -150px;
   opacity: 0.5;
   pointer-events: none;
-  transition: opacity 0.3s ease;
-}
-
-#logo-overlay.hidden {
-  opacity: 0;
-  visibility: hidden;
-}
-
-#logo-overlay img {
-  width: 353px;
-  height: 204px;
-  display: block;
 }
