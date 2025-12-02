@@ -17,6 +17,7 @@ castDebugLogger.loggerLevelByTags = {
  * DRM SUPPORT
  */
 context.getPlayerManager().setMediaPlaybackInfoHandler((loadRequest, playbackConfig) => {
+  castDebugLogger.debug(LOG_TAG, 'Setting media playback info handler.');
   const customData = loadRequest.media.customData || {};
 
   if(customData.mux && customData.mux.tokens.drm){
