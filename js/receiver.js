@@ -14,6 +14,28 @@ castDebugLogger.loggerLevelByTags = {
 };
 
 /**
+ * Logger utility that logs to both Cast Debug Logger and Console (for Vercel)
+ */
+const logger = {
+  debug: (tag, message, ...args) => {
+    castDebugLogger.debug(tag, message, ...args);
+    console.log(`[${tag}] DEBUG:`, message, ...args);
+  },
+  info: (tag, message, ...args) => {
+    castDebugLogger.info(tag, message, ...args);
+    console.log(`[${tag}] INFO:`, message, ...args);
+  },
+  warn: (tag, message, ...args) => {
+    castDebugLogger.warn(tag, message, ...args);
+    console.warn(`[${tag}] WARN:`, message, ...args);
+  },
+  error: (tag, message, ...args) => {
+    castDebugLogger.error(tag, message, ...args);
+    console.error(`[${tag}] ERROR:`, message, ...args);
+  }
+};
+
+/**
  * Initialize Cast Receiver Context
  */
 const context = cast.framework.CastReceiverContext.getInstance();
@@ -42,7 +64,7 @@ function hideLogo() {
 playerManager.addEventListener(
   cast.framework.events.EventType.PLAYER_PRELOADING,
   () => {
-    castDebugLogger.debug(LOG_TAG, 'Player preloading - hiding logo');
+    logger.debug(LOG_TAG, 'Player preloading - hiding logo');
     hideLogo();
   }
 );
@@ -50,7 +72,7 @@ playerManager.addEventListener(
 playerManager.addEventListener(
   cast.framework.events.EventType.PLAYER_LOAD_COMPLETE,
   () => {
-    castDebugLogger.debug(LOG_TAG, 'Player load complete - hiding logo');
+    logger.debug(LOG_TAG, 'Player load complete - hiding logo');
     hideLogo();
   }
 );
@@ -58,7 +80,7 @@ playerManager.addEventListener(
 playerManager.addEventListener(
   cast.framework.events.EventType.PLAYER_PLAYING,
   () => {
-    castDebugLogger.debug(LOG_TAG, 'Player playing - hiding logo');
+    logger.debug(LOG_TAG, 'Player playing - hiding logo');
     hideLogo();
   }
 );
@@ -66,7 +88,7 @@ playerManager.addEventListener(
 playerManager.addEventListener(
   cast.framework.events.EventType.PLAYER_PAUSE,
   () => {
-    castDebugLogger.debug(LOG_TAG, 'Player paused - showing logo');
+    logger.debug(LOG_TAG, 'Player paused - showing logo');
     showLogo();
   }
 );
@@ -74,7 +96,7 @@ playerManager.addEventListener(
 playerManager.addEventListener(
   cast.framework.events.EventType.PLAYER_IDLE,
   () => {
-    castDebugLogger.debug(LOG_TAG, 'Player idle - showing logo');
+    logger.debug(LOG_TAG, 'Player idle - showing logo');
     showLogo();
   }
 );
@@ -83,17 +105,17 @@ playerManager.addEventListener(
  * DRM SUPPORT
  */
 playerManager.setMediaPlaybackInfoHandler((loadRequest, playbackConfig) => {
-  castDebugLogger.debug(LOG_TAG, 'Setting media playback info handler.');
+  logger.debug(LOG_TAG, 'Setting media playback info handler.');
   const customData = loadRequest.media.customData || {};
 
   if(customData.mux && customData.mux.tokens.drm){
-    castDebugLogger.debug(LOG_TAG, 'Setting license URL.');
+    logger.debug(LOG_TAG, 'Setting license URL.');
     playbackConfig.licenseUrl = `https://license.mux.com/license/widevine/${customData.mux.playbackId}?token=${customData.mux.tokens.drm}`;
   }
 
   playbackConfig.protectionSystem = cast.framework.ContentProtection.WIDEVINE;
 
-  castDebugLogger.debug(LOG_TAG, 'license url', playbackConfig.licenseUrl);
+  logger.debug(LOG_TAG, 'license url', playbackConfig.licenseUrl);
 
   return playbackConfig;
 });
@@ -101,4 +123,6 @@ playerManager.setMediaPlaybackInfoHandler((loadRequest, playbackConfig) => {
 /**
  * START LISTENING FOR CASTS
  */
+logger.info(LOG_TAG, 'Starting Cast Receiver...');
 context.start();
+logger.info(LOG_TAG, 'Cast Receiver started successfully');
