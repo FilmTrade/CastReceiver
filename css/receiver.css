@@ -41,17 +41,17 @@ cast-media-player {
 /* FilmTrade Logo Overlay                            */
 /* ------------------------------------------------- */
 cast-media-player:after {
-  content: "";
+  content: "tests";
   position: absolute;
-  left: 0;
-  right: 0;
+  left: 50%;
   top: 50%;
-  bottom: 0;
+  transform: translate(-50%, -50%);
+  width: 353px;
+  height: 204px;
   background-image: url('./filmtrade-logo.svg');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  margin-top: -150px;
   opacity: 0.5;
   pointer-events: none;
 }
