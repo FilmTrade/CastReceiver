@@ -14,6 +14,11 @@ castDebugLogger.loggerLevelByTags = {
 };
 
 /**
+ * Initialize Cast Receiver Context
+ */
+const context = cast.framework.CastReceiverContext.getInstance();
+
+/**
  * DRM SUPPORT
  */
 context.getPlayerManager().setMediaPlaybackInfoHandler((loadRequest, playbackConfig) => {
