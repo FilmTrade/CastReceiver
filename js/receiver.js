@@ -41,65 +41,65 @@ const logger = {
 const context = cast.framework.CastReceiverContext.getInstance();
 const playerManager = context.getPlayerManager();
 
-/**
- * Logo Overlay Control
- */
-const logoOverlay = document.getElementById('logo-overlay');
+// /**
+//  * Logo Overlay Control
+//  */
+// const logoOverlay = document.getElementById('logo-overlay');
 
-function showLogo() {
-  if (logoOverlay) {
-    logoOverlay.classList.remove('hidden');
-  }
-}
+// function showLogo() {
+//   if (logoOverlay) {
+//     logoOverlay.classList.remove('hidden');
+//   }
+// }
 
-function hideLogo() {
-  if (logoOverlay) {
-    logoOverlay.classList.add('hidden');
-  }
-}
+// function hideLogo() {
+//   if (logoOverlay) {
+//     logoOverlay.classList.add('hidden');
+//   }
+// }
 
-/**
- * Listen for player state changes to show/hide logo
- */
-playerManager.addEventListener(
-  cast.framework.events.EventType.PLAYER_PRELOADING,
-  () => {
-    logger.debug(LOG_TAG, 'Player preloading - hiding logo');
-    hideLogo();
-  }
-);
+// /**
+//  * Listen for player state changes to show/hide logo
+//  */
+// playerManager.addEventListener(
+//   cast.framework.events.EventType.PLAYER_PRELOADING,
+//   () => {
+//     logger.debug(LOG_TAG, 'Player preloading - hiding logo');
+//     hideLogo();
+//   }
+// );
 
-playerManager.addEventListener(
-  cast.framework.events.EventType.PLAYER_LOAD_COMPLETE,
-  () => {
-    logger.debug(LOG_TAG, 'Player load complete - hiding logo');
-    hideLogo();
-  }
-);
+// playerManager.addEventListener(
+//   cast.framework.events.EventType.PLAYER_LOAD_COMPLETE,
+//   () => {
+//     logger.debug(LOG_TAG, 'Player load complete - hiding logo');
+//     hideLogo();
+//   }
+// );
 
-playerManager.addEventListener(
-  cast.framework.events.EventType.PLAYER_PLAYING,
-  () => {
-    logger.debug(LOG_TAG, 'Player playing - hiding logo');
-    hideLogo();
-  }
-);
+// playerManager.addEventListener(
+//   cast.framework.events.EventType.PLAYER_PLAYING,
+//   () => {
+//     logger.debug(LOG_TAG, 'Player playing - hiding logo');
+//     hideLogo();
+//   }
+// );
 
-playerManager.addEventListener(
-  cast.framework.events.EventType.PLAYER_PAUSE,
-  () => {
-    logger.debug(LOG_TAG, 'Player paused - showing logo');
-    showLogo();
-  }
-);
+// playerManager.addEventListener(
+//   cast.framework.events.EventType.PLAYER_PAUSE,
+//   () => {
+//     logger.debug(LOG_TAG, 'Player paused - showing logo');
+//     showLogo();
+//   }
+// );
 
-playerManager.addEventListener(
-  cast.framework.events.EventType.PLAYER_IDLE,
-  () => {
-    logger.debug(LOG_TAG, 'Player idle - showing logo');
-    showLogo();
-  }
-);
+// playerManager.addEventListener(
+//   cast.framework.events.EventType.PLAYER_IDLE,
+//   () => {
+//     logger.debug(LOG_TAG, 'Player idle - showing logo');
+//     showLogo();
+//   }
+// );
 
 /**
  * DRM SUPPORT
